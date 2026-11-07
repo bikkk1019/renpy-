@@ -1,0 +1,10 @@
+node_modules/
+dist/
+tests/artifacts/
+__pycache__/
+*.pyc
+*.rpyc
+.DS_Store
+Thumbs.db
+*.rpe
+*.zip

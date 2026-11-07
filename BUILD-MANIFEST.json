@@ -1,0 +1,111 @@
+{
+  "project": "GalgameVisualEditor",
+  "version": "1.0.0",
+  "created_utc": "2026-11-07T10:34:24.823053+00:00",
+  "files": {
+    ".editorconfig": {
+      "bytes": 205,
+      "sha256": "504c4c815bfe12065e3dc63c1e231e872a43c9465e0a46bfc42ffdb18c375de9"
+    },
+    ".gitignore": {
+      "bytes": 95,
+      "sha256": "dae7d53e320daf2fb50c75c0156461343ac5c67c101096cb62f6aaa5bcbb73c3"
+    },
+    "CHANGELOG.md": {
+      "bytes": 621,
+      "sha256": "a9be4d14da65c101fb2cfa19ee4bc245f9cc2f5bcbe695cd615fbb4f853f7237"
+    },
+    "docs/GitHub发布指南.md": {
+      "bytes": 2674,
+      "sha256": "bbca5e2c18fc3c75b7b0c9c32ce8828e79fcab104fd92e37781677aa9078fc0b"
+    },
+    "docs/使用说明.md": {
+      "bytes": 8103,
+      "sha256": "d8feb26b24d78a80d566bb278a233324cc1d4369ba2a966bfaa6c32c7232eb9f"
+    },
+    "docs/开发说明.md": {
+      "bytes": 3577,
+      "sha256": "1fd369c788117673da6e429c08aaa06d09e0174edec34e0dc016ffca4386acbe"
+    },
+    "docs/长剧情制作指南.md": {
+      "bytes": 6611,
+      "sha256": "799e85dae44b07da41b8d50675c5658996cdcd86a4abed17982d6cdd0df118f2"
+    },
+    "examples/分支演出示例.json": {
+      "bytes": 1629,
+      "sha256": "abe9b0ce092600f1524f5ef8c6b79d7ccbd2c48528f293c069dae18c86d7869c"
+    },
+    "package.json": {
+      "bytes": 632,
+      "sha256": "d91c89e6839228b40a980e01f8f38dfeb2639b131fc38bbe238e6f3b92005574"
+    },
+    "README.md": {
+      "bytes": 3171,
+      "sha256": "aea317adcf95d9a2be96fb9f1430cec7281b85513d9c2bc52b5aa60e28c82e81"
+    },
+    "renpy_performance_maker.html": {
+      "bytes": 8230,
+      "sha256": "e384c8f4ac74de1665865ff7aef3ca8009106e0e9018b5828d06d9bde33050f4"
+    },
+    "scripts/build_release.py": {
+      "bytes": 3197,
+      "sha256": "11f0f1911f629929f862213acb9af396c4b53e129e48ad60c0be0c2d12ec6284"
+    },
+    "scripts/start_editor.ps1": {
+      "bytes": 924,
+      "sha256": "2b50192615b6182e14b9dacc885271f5295cba219ed3ed1154218d1b711e72af"
+    },
+    "scripts/test.cjs": {
+      "bytes": 411,
+      "sha256": "c1ce557ec37b10abc4f12b066b3a65c522dcc876bba83866c2c4da7ee6dc9659"
+    },
+    "src/app.js": {
+      "bytes": 17582,
+      "sha256": "724e4e0e1a0389b73790c86ffbe21775d686fb70b663e4f3bbf1b713089a52f0"
+    },
+    "src/editor-core.js": {
+      "bytes": 16106,
+      "sha256": "53f2ff938d6dcf50fedea21b931785a632bb21465983a28d4a130291993f3982"
+    },
+    "src/story-editor.js": {
+      "bytes": 26389,
+      "sha256": "6d0e46825ad17104b2f2aad10a0fdec08529dd25aa3b6859473caf813ad2ea54"
+    },
+    "src/styles.css": {
+      "bytes": 7514,
+      "sha256": "ec9bd6bd9e3b320b4d4329418a04c4713a47fa3403978cb167911087cec4ac83"
+    },
+    "src/visual-editor.js": {
+      "bytes": 18472,
+      "sha256": "846190bddd2fec70d81420759a3e0aee0f7d223475fe86146bdf820a0ffc91c5"
+    },
+    "tests/helpers/environment.cjs": {
+      "bytes": 1192,
+      "sha256": "e5e395bc0a09bf62ba934db455d0fecfa199b732d1cc7c45b905aab819050a36"
+    },
+    "tests/longform.cjs": {
+      "bytes": 8194,
+      "sha256": "c6a6fbfd7705219a3fec4af8d96891ea2b7028e4a1f6d11266b056e8caf7231c"
+    },
+    "tests/regression.cjs": {
+      "bytes": 11348,
+      "sha256": "c12c7e9f5b37de24fc95d25a1b5d92daf075646247e27f2fdf29fd2c26c12a4c"
+    },
+    "tests/visual.cjs": {
+      "bytes": 4253,
+      "sha256": "f02c05a1070098241116b0a826f9d732cfc88d33f6519e3b9086e901dd144d16"
+    },
+    "tools/renpy_check.py": {
+      "bytes": 5050,
+      "sha256": "5445b5d7d00e6f08ee5050b933de55fcdfdc80493f8cc93fc8212d9b719cade0"
+    },
+    "启动编辑器.cmd": {
+      "bytes": 123,
+      "sha256": "539f7e2d804573946a1de5ce15a08224c5adb3e0a633d7df61c510cd7cb73aaf"
+    },
+    "打开工程检查工具.cmd": {
+      "bytes": 70,
+      "sha256": "c5f7a4d0e9a0f3fc9a52b42fe80417c92945bab6d3e8fadd32deba25f3e3136c"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "galgame-visual-editor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "离线 Ren'Py 长剧情与演出脚本编辑器",
+  "scripts": {
+    "test": "node scripts/test.cjs",
+    "test:regression": "node tests/regression.cjs",
+    "test:visual": "node tests/visual.cjs",
+    "test:longform": "node tests/longform.cjs",
+    "check": "node --check src/editor-core.js && node --check src/app.js && node --check src/story-editor.js && node --check src/visual-editor.js",
+    "release": "python scripts/build_release.py"
+  },
+  "engines": { "node": ">=20" },
+  "devDependencies": { "playwright-core": "1.62.1" }
+}

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ren'Py 演出脚本生成器</title>
+<link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+<header>
+  <h1>Ren'Py 演出脚本生成器</h1>
+  <div class="row" style="flex:0 0 auto">
+    <button id="undoBtn" title="Ctrl+Z（输入框内使用原生撤销）">撤销</button>
+    <button id="redoBtn" title="Ctrl+Y">重做</button>
+    <button id="saveProjectBtn">保存工程</button>
+    <button id="saveBundleBtn">打包工程与图片</button>
+    <button id="loadProjectBtn">读取工程</button>
+    <button id="clearBtn" class="danger">清空</button>
+  </div>
+</header>
+<main>
+  <aside class="panel toolbar">
+    <h2>剧情目录</h2>
+    <input id="chapterSearch" placeholder="查找段落" aria-label="查找段落">
+    <div id="chapterList"></div>
+    <button id="allChapters">查看全部段落</button>
+    <button id="renameChapter">重命名当前段落</button>
+    <details><summary>工程工具</summary>
+      <button id="inspectProject">检查剧情 / 分支</button>
+      <button id="linkGame">读取游戏工程索引</button>
+      <button id="downloadChapters">导出分段脚本包</button>
+      <button id="recoverDraft">恢复备份草稿</button>
+      <label>外部 label（每行一个）<textarea id="externalLabels" rows="3" placeholder="其他文件中已存在的 label"></textarea></label>
+      <div id="gameIndexStatus" class="small"></div>
+    </details>
+    <h2>画面与立绘</h2>
+    <button data-add="scene">切换场景</button>
+    <button data-add="show">显示 / 更换立绘</button>
+    <button data-add="hide">隐藏立绘</button>
+    <button data-add="animation">立绘动画</button>
+    <h2>对白与声音</h2>
+    <button data-add="say">台词 / 旁白</button>
+    <button data-add="audio">声音控制</button>
+    <button data-add="window">对话框</button>
+    <button data-add="wait">等待</button>
+    <h2>剧情流程</h2>
+    <button data-add="menu">选项分支</button>
+    <button data-add="label">剧情段落</button>
+    <button data-add="jump">跳转 / 调用</button>
+    <button data-add="condition">条件跳转</button>
+    <button data-add="variable">变量赋值</button>
+    <button data-add="return">返回 / 结束</button>
+    <button data-add="raw">原始代码</button>
+    <div class="small" style="margin-top:10px">图片名直接填 Ren'Py 里的名字，例如 bg room、eileen happy。</div>
+  </aside>
+
+  <section class="panel steps">
+    <label>工程名称<input id="projectTitle" placeholder="我的长篇故事"></label>
+    <div class="settings">
+      <label class="checkbox"><input type="checkbox" id="wrapLabel" checked> 包裹 label</label>
+      <label>label 名<input type="text" id="labelName" value="performance_1"></label>
+    </div>
+    <div id="saveStatus" class="small" role="status"></div>
+    <div class="story-tools">
+      <input id="storySearch" placeholder="搜索台词、角色、图片名、备注…" aria-label="搜索剧情">
+      <select id="storyType" aria-label="步骤类型筛选"><option value="">所有类型</option></select>
+      <select id="storyStatus" aria-label="制作状态筛选"><option value="">所有状态</option><option value="draft">草稿</option><option value="todo">待处理</option><option value="reviewed">已校对</option></select>
+      <label class="checkbox"><input id="onlyBookmarks" type="checkbox">只看书签</label>
+      <label class="checkbox"><input id="compactMode" type="checkbox" checked>长篇模式</label>
+    </div>
+    <div class="story-tools">
+      <button id="importDialogue">批量导入台词</button><button id="replaceDialogue">查找替换</button>
+      <select id="insertPosition" aria-label="新增步骤位置"><option value="after">插入当前步骤之后</option><option value="end">追加到工程末尾</option></select>
+    </div>
+    <div class="story-tools">
+      <button id="selectPage">选中本页正文</button><button id="clearSelection">取消多选</button><button id="copySelected">复制多选</button><button id="deleteSelected">删除多选</button>
+      <select id="moveDestination" aria-label="移动到段落"></select><button id="moveSelected">移动到段落末尾</button>
+      <select id="batchStatus" aria-label="批量制作状态"><option value="draft">草稿</option><option value="todo">待处理</option><option value="reviewed">已校对</option></select><button id="applyBatchStatus">应用状态</button>
+    </div>
+    <div class="story-tools"><button id="pagePrevious">上一页</button><span id="pageInfo" class="small"></span><button id="pageNext">下一页</button><span id="storyStats" class="small"></span></div>
+    <div id="stepList"></div>
+  </section>
+
+  <aside class="panel output">
+    <section id="visualEditor" aria-label="可视化舞台">
+      <div class="stage-heading"><h2>可视化舞台</h2><span id="stageSelection" class="small"></span></div>
+      <div class="stage-tools">
+        <button id="previousFrame">上一步</button><button id="nextFrame">下一步</button>
+        <button id="playFrame" class="primary">播放本步</button><button id="stopFrame">停止</button>
+        <label class="checkbox"><input id="stageGrid" type="checkbox" checked>辅助线</label>
+      </div>
+      <canvas id="stageCanvas" width="1280" height="720" tabindex="0" aria-label="演出预览；选择显示立绘或移动步骤后可拖动立绘"></canvas>
+      <div id="stageStatus" class="small" role="status"></div>
+      <div class="stage-tools">
+        <label>画布宽<input id="stageWidth" type="number" min="320" max="7680" step="1" value="1280"></label>
+        <label>高<input id="stageHeight" type="number" min="180" max="4320" step="1" value="720"></label>
+        <button id="applyStageSize">应用尺寸</button>
+      </div>
+      <details id="assetDetails">
+        <summary>素材库 · 导入背景与立绘</summary>
+        <div class="stage-tools"><button id="importImages">导入图片</button><button id="importImageFolder">导入图片文件夹</button></div>
+        <div class="small">素材名称需与步骤中的图片名一致。点击“用于当前步骤”绑定；图片保存在本机浏览器，JSON 只保存名称与引用。</div>
+        <div id="assetList"></div>
+      </details>
+      <div class="small stage-note">点击左侧步骤查看画面。仅预演画面和当前步骤动画；不执行 Python、跳转、条件或声音。效果以 Ren'Py 试玩为准。</div>
+    </section>
+    <h2>生成的 rpy</h2>
+    <div id="validation" aria-live="polite"></div>
+    <textarea id="outputArea" readonly placeholder="点生成脚本后显示结果"></textarea>
+    <div class="actions">
+      <button id="generateBtn" class="primary">生成脚本</button>
+      <button id="copyBtn">复制脚本</button>
+      <button id="downloadBtn">下载 .rpy</button>
+      <button id="writeProjectBtn">写入 Ren'Py 工程</button>
+    </div>
+    <div class="small">可选择工程根目录或 game 目录。覆盖前会确认，并将原文件备份为 .bak。首次使用请先保存工程 JSON。</div>
+    <div class="small">脚本实时更新。Ctrl+S 保存工程；输入框外 Ctrl+Z / Ctrl+Y 撤销 / 重做。草稿仅保存在当前浏览器，建议定期保存 JSON。</div>
+  </aside>
+</main>
+<input type="file" id="fileProject" accept=".json,.rpe" hidden>
+<input type="file" id="imageFiles" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden>
+<input type="file" id="imageFolder" webkitdirectory multiple hidden>
+<datalist id="labelSuggestions"></datalist>
+<datalist id="imageSuggestions"></datalist><datalist id="speakerSuggestions"></datalist><datalist id="audioSuggestions"></datalist>
+<div id="toast" role="status"></div>
+<dialog id="storyDialog"><div class="dialog-head"><h2 id="dialogTitle"></h2><button id="closeStoryDialog">关闭</button></div><div id="dialogContent"></div></dialog>
+<script src="src/editor-core.js"></script>
+<script src="src/app.js"></script>
+<script src="src/story-editor.js"></script>
+<script src="src/visual-editor.js"></script>
+</body>
+</html>
