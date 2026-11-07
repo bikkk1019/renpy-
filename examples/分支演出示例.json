@@ -1,0 +1,90 @@
+{
+  "version": 3,
+  "labelName": "performance_demo",
+  "wrapLabel": true,
+  "steps": [
+    {
+      "type": "variable",
+      "name": "score",
+      "value": "0"
+    },
+    {
+      "type": "scene",
+      "image": "bg room"
+    },
+    {
+      "type": "show",
+      "image": "eileen happy",
+      "preset": "center"
+    },
+    {
+      "type": "say",
+      "speaker": "e",
+      "text": "你好！现在显示立绘已经自带淡入效果。"
+    },
+    {
+      "type": "animation",
+      "image": "eileen happy",
+      "mode": "bounce",
+      "duration": 0.6,
+      "wait": "yes"
+    },
+    {
+      "type": "menu",
+      "menuText": "一起出发 -> branch_a\n留在这里 -> branch_b"
+    },
+    {
+      "type": "label",
+      "name": "branch_a"
+    },
+    {
+      "type": "variable",
+      "name": "score",
+      "operator": "+=",
+      "value": "1"
+    },
+    {
+      "type": "jump",
+      "mode": "call",
+      "target": "greeting"
+    },
+    {
+      "type": "say",
+      "speaker": "e",
+      "text": "从公共段落返回了，继续这条分支。"
+    },
+    {
+      "type": "hide",
+      "image": "eileen",
+      "transition": "dissolve",
+      "duration": 0.5
+    },
+    {
+      "type": "return"
+    },
+    {
+      "type": "label",
+      "name": "branch_b"
+    },
+    {
+      "type": "say",
+      "speaker": "e",
+      "text": "那就再休息一会儿吧。"
+    },
+    {
+      "type": "return"
+    },
+    {
+      "type": "label",
+      "name": "greeting"
+    },
+    {
+      "type": "say",
+      "speaker": "e",
+      "text": "这是可以重复调用的公共段落。"
+    },
+    {
+      "type": "return"
+    }
+  ]
+}
